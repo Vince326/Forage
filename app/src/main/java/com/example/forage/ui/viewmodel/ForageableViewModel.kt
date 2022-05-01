@@ -15,10 +15,7 @@
  */
 package com.example.forage.ui.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.forage.data.ForageableDao
 import com.example.forage.model.Forageable
 import com.example.forage.ui.adapter.ForageableListAdapter
@@ -34,15 +31,16 @@ import kotlinx.coroutines.launch
 // TODO: pass a ForageableDao value as a parameter to the view model constructor
 class ForageableViewModel(
     // Pass dao here
-   private val forageableDao: ForageableDao
+    val forageableDao: ForageableDao
 ): ViewModel() {
 
     // TODO: create a property to set to a list of all forageables from the DAO
-        val allForageables: LiveData<List<Forageable>> = forageableDao.getForageables()
+        val allForageables: LiveData<List<Forageable>> = forageableDao.getForageables().asLiveData()
 
     // TODO : create method that takes id: Long as a parameter and retrieve a Forageable from the
     //  database by id via the DAO.
         fun retrieveForageable(id: Long) : LiveData<Forageable> = forageableDao.getForageable(id)
+        .asLiveData()
 
     fun addForageable(
         name: String,
@@ -78,14 +76,14 @@ class ForageableViewModel(
             notes = notes
         )
         viewModelScope.launch(Dispatchers.IO) {
-            // TODO: call the DAO method to update a forageable to the database here
+           //Calls the DAO method to update the forageable to the database
             forageableDao.update(forageable)
         }
     }
 
     fun deleteForageable(forageable: Forageable) {
         viewModelScope.launch(Dispatchers.IO) {
-            // TODO: call the DAO method to delete a forageable to the database here
+            //Calls a method to delete the foragable from the database
             forageableDao.delete(forageable)
         }
     }
