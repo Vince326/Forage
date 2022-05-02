@@ -41,9 +41,10 @@ abstract class ForageDatabase : RoomDatabase(){
                 val instance = Room.databaseBuilder(
                     context,
                     ForageDatabase::class.java,
-                    "forageable_database").fallbackToDestructiveMigration()
+                    "forageable_database")
+                    .createFromAsset("databases/forage_database.db")
+                    .fallbackToDestructiveMigration()
                     .build()
-
                 INSTANCE = instance
 
                 instance
