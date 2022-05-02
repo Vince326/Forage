@@ -39,7 +39,7 @@ class ForageableViewModel(
 
     // TODO : create method that takes id: Long as a parameter and retrieve a Forageable from the
     //  database by id via the DAO.
-        fun retrieveForageable(id: Long) : LiveData<Forageable> = forageableDao.getForageable(id)
+        fun getForageable(id: Long) : LiveData<Forageable> = forageableDao.getForageable(id)
         .asLiveData()
 
     fun addForageable(
