@@ -42,7 +42,7 @@ abstract class ForageDatabase : RoomDatabase(){
                     context,
                     ForageDatabase::class.java,
                     "forageable_database")
-                    .createFromAsset("databases/forage_database.db")
+                    //.createFromAsset("databases/forage_database.db")
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
